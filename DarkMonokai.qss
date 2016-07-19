@@ -454,14 +454,14 @@ ChatLine::sender#plain[sender="4"] { foreground: #58afb3; }
 ChatLine::sender#plain[sender="5"] { foreground: #9d54b3; }
 ChatLine::sender#plain[sender="6"] { foreground: #b39775; }
 ChatLine::sender#plain[sender="7"] { foreground: #3176b3; }
-ChatLine::sender#plain[sender="8"] { foreground: #e90d7f; }
-ChatLine::sender#plain[sender="9"] { foreground: #8e55e9; }
-ChatLine::sender#plain[sender="a"] { foreground: #b30e0e; }
-ChatLine::sender#plain[sender="b"] { foreground: #17b339; }
-ChatLine::sender#plain[sender="c"] { foreground: #58afb3; }
-ChatLine::sender#plain[sender="d"] { foreground: #9d54b3; }
-ChatLine::sender#plain[sender="e"] { foreground: #b39775; }
-ChatLine::sender#plain[sender="f"] { foreground: #3176b3; }
+ChatLine::sender#plain[sender="8"] { foreground: #fdff5f; }
+ChatLine::sender#plain[sender="9"] { foreground: #ff4f4f; }
+ChatLine::sender#plain[sender="a"] { foreground: #d45928; }
+ChatLine::sender#plain[sender="b"] { foreground: #92c625; }
+ChatLine::sender#plain[sender="c"] { foreground: #d081fe; }
+ChatLine::sender#plain[sender="d"] { foreground: #ffb67a; }
+ChatLine::sender#plain[sender="e"] { foreground: #66cc8c; }
+ChatLine::sender#plain[sender="f"] { foreground: #bbbebc; }
 
 
 /*
