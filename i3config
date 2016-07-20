@@ -12,16 +12,15 @@ font pango:Tewi 9px
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
-bindsym $mod+Shift+Return exec urxvtc -e sh
-
-bindsym $mod+Shift+s exec screenshot
+#bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Shift+Return exec i3-sensible-terminal -e sh
+#bindsym $mod+t exec xterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 bindsym $mod+Shift+d exec i3-dmenu-desktop
 
 # change focus
@@ -138,13 +137,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#chameleon: herbsluftwm resizes, no hjkl because other bindings:
-bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
-
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -173,6 +165,7 @@ for_window [class="Sakura"] border 1pixel
 for_window [class="Xfce4-notifyd"] floating enable, border none
 for_window [class="Truecrypt"] floating enable
 for_window [title="Firefox Preferences"] floating enable
+for_window [title="Pale Moon Preferences"] floating enable
 for_window [class="Guake"] floating enable, border none
 for_window [class="rdesktop"] border none, floating disable
 assign [title="Outbreak RDP"] "Outbreak RDP"
@@ -181,9 +174,6 @@ bindsym XF86AudioNext exec press-next
 bindsym XF86AudioPrev exec press-prev
 bindsym XF86AudioPlay exec press-pause
 bindsym XF86AudioStop exec press-stop
-bindsym XF86AudioRaiseVolume exec volup
-bindsym XF86AudioLowerVolume exec voldown
-bindsym XF86AudioMute exec volmute
 
 # For keyboards with only volume keys
 bindsym Shift+XF86AudioRaiseVolume exec press-next
@@ -191,7 +181,7 @@ bindsym Shift+XF86AudioLowerVolume exec press-prev
 bindsym Shift+XF86AudioMute exec press-pause
 
 bindsym $mod+b border toggle
-bindsym Ctrl+$mod+l exec i3lock
+#bindsym Ctrl+$mod+l exec i3lock
 bindsym Ctrl+$mod+b exec bg-random
 bindsym $mod+slash scratchpad show
 bindsym $mod+Shift+slash move to scratchpad
@@ -208,23 +198,40 @@ mode "keyquote" {
 }
 bindsym $mod+BackSpace mode keyquote
 
-mode "run" {
-    bindsym Escape mode default
-
-    bindsym Return exec i3-sensible-terminal, mode default
-    bindsym f exec firefox, mode default
-    bindsym r exec urxvtc -e racket, mode default
-    bindsym p exec palemoon, mode default
-    bindsym l exec luakit, mode default
-    bindsym s exec ssh-add -c, mode default
-}
-bindsym $mod+x mode run
+#mode "run" {
+#    bindsym Escape mode default
+#
+#    bindsym Return exec i3-sensible-terminal, mode default
+#    bindsym p exec sudo -u ff palemoon, mode default
+#    bindsym q exec quasselclient, mode default
+#    bindsym d exec dillo, mode default
+#    bindsym l exec links -g, mode default
+#    bindsym s exec ssh-add -c, mode default
+#}
+#bindsym $mod+x mode run
 
 # class                 border  backgr. text    indicator
 client.focused          #4c7899 #285577 #ffffff #2e9ef4
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused        #333333 #222222 #888888 #292d2e
 client.urgent           #2f343a #900000 #ffffff #900000
+#chameleon: herbsluftwm resizes, no hjkl because other bindings:
+bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
 
 #Extra; this hopefully will fix the gimp "sure you want to quit" popup
 popup_during_fullscreen smart
+
+#plan9port and inferno
+#This basically turns i3 into a better rio :P
+assign [class="Inferno"] Inferno
+for_window [class="Inferno"] border none, fullscreen
+for_window [class="acme"] floating enable
+for_window [class="9term"] floating enable
+for_window [class="sam"] floating enable
+for_window [class="stats"] floating enable
+#bindsym $mod+Shift+a exec acme
+#9term needs a full path or rc whinges
+#bindsym $mod+n exec path="/home/chameleon/plan9port/bin:$PATH" /home/chameleon/plan9port/bin/9term -W 640x400 rc
