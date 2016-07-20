@@ -12,7 +12,7 @@ myblog=http://blog.kingdomofmysteries.xyz/
 
 if [ -z "$birthd" ]
 then
-	birthd=$(sudo head -n1 /var/log/emerge.log | sed -e's/\([0-9]*\):.*/@\1/' | date -f- +"%Y.%m.%d")
+	birthd=$(sudo sed -e'1q' /var/log/emerge.log | sed -e's/\([0-9]*\):.*/@\1/' | date -f- +"%Y.%m.%d")
 	echo "It would be best if you put birthd=$birthd after the #! line in $0 so I don't have to ask you for your password" >&2
 fi
 
