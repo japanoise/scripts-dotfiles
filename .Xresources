@@ -94,9 +94,12 @@ xterm*foreground: rgb:cc/cc/cc
 xterm*background: rgb:00/00/00
 
 ! phrak1 from terminal.sexy
-! special
- *.foreground:   #a8a8a8
-URxvt*background: rgba:0000/0000/0000/dddd
+! With a slight tweak so its not using
+! a grey foreground...
+! *.foreground:   #a8a8a8
+ *.foreground:    #f8f8f8
+URxvt*background: rgba:0aaa/0aaa/0aaa/eeee
+!URxvt*background: #0a0a0a
  *.cursorColor:  #a8a8a8
 
 ! black
