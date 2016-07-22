@@ -1,4 +1,7 @@
 #!/bin/bash
+getcolour(){
+	xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color'$1':[ ]*\(#[0-9a-f]*\)/\1/p'
+}
 
 c00=$'\e[0;30m'
 c01=$'\e[0;31m'
@@ -16,22 +19,22 @@ c12=$'\e[1;34m'
 c13=$'\e[1;35m'
 c14=$'\e[1;36m'
 c15=$'\e[1;37m'
-code00=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?0:[ ]*\(#[0-9a-f]*\)/\1/p')
-code01=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?1:[ ]*\(#[0-9a-f]*\)/\1/p')
-code02=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?2:[ ]*\(#[0-9a-f]*\)/\1/p')
-code03=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?3:[ ]*\(#[0-9a-f]*\)/\1/p')
-code04=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?4:[ ]*\(#[0-9a-f]*\)/\1/p')
-code05=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?5:[ ]*\(#[0-9a-f]*\)/\1/p')
-code06=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?6:[ ]*\(#[0-9a-f]*\)/\1/p')
-code07=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?7:[ ]*\(#[0-9a-f]*\)/\1/p')
-code08=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?8:[ ]*\(#[0-9a-f]*\)/\1/p')
-code09=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color0\?9:[ ]*\(#[0-9a-f]*\)/\1/p')
-code10=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color10:[ ]*\(#[0-9a-f]*\)/\1/p')
-code11=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color11:[ ]*\(#[0-9a-f]*\)/\1/p')
-code12=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color12:[ ]*\(#[0-9a-f]*\)/\1/p')
-code13=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color13:[ ]*\(#[0-9a-f]*\)/\1/p')
-code14=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color14:[ ]*\(#[0-9a-f]*\)/\1/p')
-code15=$(xrdb -query .Xresources | tr "\t" " " | sed -ne's/^[a-zA-Z0-9]*\*\.color15:[ ]*\(#[0-9a-f]*\)/\1/p')
+code00=$(getcolour "0\\?0")
+code01=$(getcolour "0\\?1")
+code02=$(getcolour "0\\?2")
+code03=$(getcolour "0\\?3")
+code04=$(getcolour "0\\?4")
+code05=$(getcolour "0\\?5")
+code06=$(getcolour "0\\?6")
+code07=$(getcolour "0\\?7")
+code08=$(getcolour "0\\?8")
+code09=$(getcolour "0\\?9")
+code10=$(getcolour "10")
+code11=$(getcolour "11")
+code12=$(getcolour "12")
+code13=$(getcolour "13")
+code14=$(getcolour "14")
+code15=$(getcolour "15")
 
 cat << EOF
 ${c00}${code00} ${c01}${code01} ${c02}${code02} ${c03}${code03} ${c04}${code04} ${c05}${code05} ${c06}${code06} ${c07}${code07}
