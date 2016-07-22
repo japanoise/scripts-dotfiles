@@ -1,19 +1,29 @@
 #!/bin/bash
 # Forked from z3bra's info.sh
 # Runs in bash, because dash doesn't like colours.
-
-if ! eix --help >/dev/null 2>&1; then
-	echo "This script requires app-portage/eix to be installed"
-	exit 1
-fi
-
 gitdir=https://github.com/japanoise/
 myblog=http://blog.kingdomofmysteries.xyz/
 
-if [ -z "$birthd" ]
-then
-	birthd=$(sudo sed -e'1q' /var/log/emerge.log | sed -e's/\([0-9]*\):.*/@\1/' | date -f- +"%Y.%m.%d")
-	echo "It would be best if you put birthd=$birthd after the #! line in $0 so I don't have to ask you for your password" >&2
+if emerge --help >/dev/null 2>&1; then
+	#system is Gentoo or variant
+	system=Gentoo
+	if ! eix --help >/dev/null 2>&1; then
+		echo "This script requires app-portage/eix to be installed"
+		exit 1
+	fi
+	pkgnum=$(EIX_LIMIT=0 eix '-I*' --format '<installedversions:NAMEVERSION>' | wc -l)
+	if [ -z "$birthd" ]
+	then
+		birthd=$(sudo sed -e'1q' /var/log/emerge.log | sed -e's/\([0-9]*\):.*/@\1/' | date -f- +"%Y.%m.%d")
+		echo "It would be best if you put birthd=$birthd after the #! line in $0 so I don't have to ask you for your password" >&2
+	fi
+else
+	if pacman -h >/dev/null 2>&1; then
+		#system is Arch; this will need testing
+		system=Arch
+		pkgnum=`pacman -Q|wc -l`
+		birthd=`sed -n '1s/^\[\([0-9-]*\).*$/\1/p' /var/log/pacman.log | tr - .`
+	fi
 fi
 
 c00=$'\e[0;30m'
@@ -39,7 +49,6 @@ f2=$'\e[0;37m'
 
 kernel=$(uname -rmo)
 cpuspe="$(sed -n '/model\ name/s/^.*:\ //p' /proc/cpuinfo | uniq) (x$(nproc))"
-system=Gentoo
 
 if [ -n "$DISPLAY" ]; then
     wmname=$(xprop -root _NET_WM_NAME|cut -d\" -f2) 
@@ -51,7 +60,6 @@ else
     systfn="none"
 fi
 
-pkgnum=$(EIX_LIMIT=0 eix '-I*' --format '<installedversions:NAMEVERSION>' | wc -l)
 
 cat << EOF
 ${c00}▉▉  | ${f1}OS ${f0}........... $f2$system
