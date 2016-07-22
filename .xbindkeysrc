@@ -95,3 +95,6 @@
 
 "acme"
   Mod4+Shift+a
+
+"bg-random"
+  Control+Mod4+b
