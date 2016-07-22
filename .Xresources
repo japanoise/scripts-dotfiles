@@ -1,10 +1,6 @@
 URxvt*geometry: 120x40
-! URxvt*font: xft:Terminus:style=Regular:pixelsize=14:antialias=false
-! URxvt*font: xft:Source Code Pro:style=Regular:pixelsize=11:antialias=0:hinting=0:rgba=none
-! URxvt*font: -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1
 URxvt.font: xft:Tewi:pixelsize=9:antialias=false
 URxvt.preeditType: Root
-! URxvt*letterSpace: 0
 
 URxvt*saveLines: 10000
 URxvt*scrollBar: false
@@ -34,6 +30,7 @@ URxvt.matcher.button: 1
 URxvt.keysym.S-C-C: perl:clipboard:copy
 URxvt.keysym.S-C-V: perl:clipboard:paste
 URxvt.keysym.S-C-B: perl:clipboard:paste_escaped
+URxvt.keysym.S-C-U: perl:url-select:select_next
 
 ! Tabs: gray background, ~white text
 ! and the opposite for the currently focused tab
@@ -96,41 +93,34 @@ xterm*background: rgb:00/00/00
 ! phrak1 from terminal.sexy
 ! With a slight tweak so its not using
 ! a grey foreground...
-! *.foreground:   #a8a8a8
  *.foreground:    #f8f8f8
 URxvt*background: rgba:0aaa/0aaa/0aaa/eeee
-!URxvt*background: #0a0a0a
  *.cursorColor:  #a8a8a8
-
 ! black
  *.color0:       #000000
  *.color8:       #545054
-
 ! red
  *.color1:       #a80000
  *.color9:       #f85450
-
 ! green
  *.color2:       #00a800
  *.color10:      #50fc50
-
 ! yellow
  *.color3:       #a85400
  *.color11:      #f8fc50
-
 ! blue
  *.color4:       #0000a8
  *.color12:      #5054f8
-
 ! magenta
  *.color5:       #a800a8
  *.color13:      #f854f8
-
 ! cyan
  *.color6:       #00a8a8
  *.color14:      #50fcf8
-
 ! white
  *.color7:       #a8a8a8
  *.color15:      #f8fcf8
 
+! bringing this back as stopped
+! using compton for it
+URxvt*fading: 30
