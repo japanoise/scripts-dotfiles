@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Forked from z3bra's info.sh
 # Runs in bash, because dash doesn't like colours.
 gitdir=https://github.com/japanoise/
@@ -26,26 +26,26 @@ else
 	fi
 fi
 
-c00=$'\e[0;30m'
-c01=$'\e[0;31m'
-c02=$'\e[0;32m'
-c03=$'\e[0;33m'
-c04=$'\e[0;34m'
-c05=$'\e[0;35m'
-c06=$'\e[0;36m'
-c07=$'\e[0;37m'
-c08=$'\e[1;30m'
-c09=$'\e[1;31m'
-c10=$'\e[1;32m'
-c11=$'\e[1;33m'
-c12=$'\e[1;34m'
-c13=$'\e[1;35m'
-c14=$'\e[1;36m'
-c15=$'\e[1;37m'
+c00=$(printf '\033[0;30m')
+c01=$(printf '\033[0;31m')
+c02=$(printf '\033[0;32m')
+c03=$(printf '\033[0;33m')
+c04=$(printf '\033[0;34m')
+c05=$(printf '\033[0;35m')
+c06=$(printf '\033[0;36m')
+c07=$(printf '\033[0;37m')
+c08=$(printf '\033[1;30m')
+c09=$(printf '\033[1;31m')
+c10=$(printf '\033[1;32m')
+c11=$(printf '\033[1;33m')
+c12=$(printf '\033[1;34m')
+c13=$(printf '\033[1;35m')
+c14=$(printf '\033[1;36m')
+c15=$(printf '\033[1;37m')
 
-f0=$'\e[1;30m'
-f1=$'\e[1;37m'
-f2=$'\e[0;37m'
+f0=$(printf '\033[1;30m')
+f1=$(printf '\033[1;37m')
+f2=$(printf '\033[0;37m')
 
 kernel=$(uname -rmo)
 cpuspe="$(sed -n '/model\ name/s/^.*:\ //p' /proc/cpuinfo | uniq) (x$(nproc))"
@@ -63,7 +63,7 @@ fi
 
 cat << EOF
 ${c00}▉▉  | ${f1}OS ${f0}........... $f2$system
-${c08}  ▉▉| ${f1}name ${f0}......... $f2$HOSTNAME
+${c08}  ▉▉| ${f1}name ${f0}......... $f2${HOSTNAME:-$(hostname)}
 ${c01}▉▉  | ${f1}birth day${f0}..... $f2$birthd
 ${c09}  ▉▉| ${f1}packages ${f0}..... $f2$pkgnum
 ${c02}▉▉  | 
