@@ -26,6 +26,7 @@ else
 	fi
 fi
 
+reset=$(printf '\033[0m')
 c00=$(printf '\033[0;30m')
 c01=$(printf '\033[0;31m')
 c02=$(printf '\033[0;32m')
@@ -77,5 +78,5 @@ ${c13}  ▉▉| ${f1}kernel ${f0}....... $f2$kernel
 ${c06}▉▉  | ${f1}processor ${f0}.... $f2$cpuspe
 ${c14}  ▉▉| 
 ${c07}▉▉  | ${f1}blog ${f0}......... $f2$myblog
-${c15}  ▉▉| ${f1}git repos ${f0}.... $f2$gitdir
+${c15}  ▉▉| ${f1}git repos ${f0}.... $f2$gitdir${reset}
 EOF
