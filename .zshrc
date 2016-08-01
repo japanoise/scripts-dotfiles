@@ -66,29 +66,16 @@ fi
 # Colors - arch wiki
 autoload -Uz colors && colors
 # git prompt status - oh-my-zsh + modifcations
-# Hairy code that needs a refactor incoming~
 function git_prompt_status() {
   local INDEX STATUS
   INDEX=$(command git status --porcelain -b 2> /dev/null)
   STATUS=""
-  if $(echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null); then
-    STATUS="%{$fg[blue]%}✈$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^A  \|^M  ' &> /dev/null); then
-    STATUS="%{$fg[cyan]%}+$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^ M \|^AM \|^ T ' &> /dev/null); then
-    STATUS="%{$fg[yellow]%}✱$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^R  ' &> /dev/null); then
-    STATUS="%{$fg[blue]%}➦$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^ D \|^D  \|^AD ' &> /dev/null); then
-    STATUS="%{$fg[red]%}✗$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
-    STATUS="%{$fg[magenta]%}✂$STATUS"
-  fi
+  echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null && STATUS="%{$fg[blue]%}✈$STATUS"
+  echo "$INDEX" | grep '^A  \|^M  ' &> /dev/null && STATUS="%{$fg[cyan]%}+$STATUS"
+  echo "$INDEX" | grep '^ M \|^AM \|^ T ' &> /dev/null && STATUS="%{$fg[yellow]%}✱$STATUS"
+  echo "$INDEX" | grep '^R  ' &> /dev/null && STATUS="%{$fg[blue]%}➦$STATUS"
+  echo "$INDEX" | grep '^ D \|^D  \|^AD ' &> /dev/null && STATUS="%{$fg[red]%}✗$STATUS"
+  echo "$INDEX" | grep '^UU ' &> /dev/null && STATUS="%{$fg[magenta]%}✂$STATUS"
   echo $STATUS
 }
 
