@@ -80,7 +80,6 @@ else
 fi
 # Colors - arch wiki
 autoload -Uz colors && colors
-
 # git prompt status - oh-my-zsh
 # Hairy code that needs a refactor incoming~
 function git_prompt_status() {
@@ -90,30 +89,20 @@ function git_prompt_status() {
   if $(echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null); then
     STATUS="%{$fg[blue]%}✈$STATUS"
   fi
-  if $(echo "$INDEX" | grep '^A  ' &> /dev/null); then
-    STATUS="%{$fg[cyan]%}+$STATUS"
-  elif $(echo "$INDEX" | grep '^M  ' &> /dev/null); then
+  if $(echo "$INDEX" | grep '^A  \|^M  ' &> /dev/null); then
     STATUS="%{$fg[cyan]%}+$STATUS"
   fi
-  if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
-    STATUS="%{$fg[yellow]%}✱$STATUS"
-  elif $(echo "$INDEX" | grep '^AM ' &> /dev/null); then
-    STATUS="%{$fg[yellow]%}✱$STATUS"
-  elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
+  if $(echo "$INDEX" | grep '^ M \|^AM \|^ T ' &> /dev/null); then
     STATUS="%{$fg[yellow]%}✱$STATUS"
   fi
   if $(echo "$INDEX" | grep '^R  ' &> /dev/null); then
-    STATUS="%{$fg[blue]%}➦"
+    STATUS="%{$fg[blue]%}➦$STATUS"
   fi
-  if $(echo "$INDEX" | grep '^ D ' &> /dev/null); then
-    STATUS="%{$fg[red]%}✗"
-  elif $(echo "$INDEX" | grep '^D  ' &> /dev/null); then
-    STATUS="%{$fg[red]%}✗"
-  elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
-    STATUS="%{$fg[red]%}✗"
+  if $(echo "$INDEX" | grep '^ D \|^D  \|^AD ' &> /dev/null); then
+    STATUS="%{$fg[red]%}✗$STATUS"
   fi
   if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
-    STATUS="%{$fg[magenta]%}✂"
+    STATUS="%{$fg[magenta]%}✂$STATUS"
   fi
   #The following are unused, pending removal.
   if $(command git rev-parse --verify refs/stash >/dev/null 2>&1); then
@@ -130,6 +119,7 @@ function git_prompt_status() {
   fi
   echo $STATUS
 }
+
 # Prompt - user, host, full path, and time/date; modified from rkj-repos (oh-my-zsh)
 # on two lines for easier vgrepping
 function mygit() {
