@@ -16,7 +16,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory autocd PROMPT_SUBST
 unsetopt beep extendedglob nomatch notify
-# Keys - oh-my-zsh
+# Keys - oh-my-zsh + modifications
 # includes home and end :^)
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   function zle-line-init() {
@@ -32,26 +32,15 @@ fi
 bindkey -e                                            # Use emacs key bindings
 
 bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark
-bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls
 bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
-if [[ "${terminfo[kpp]}" != "" ]]; then
-  bindkey "${terminfo[kpp]}" up-line-or-history       # [PageUp] - Up a line of history
-fi
-if [[ "${terminfo[knp]}" != "" ]]; then
-  bindkey "${terminfo[knp]}" down-line-or-history     # [PageDown] - Down a line of history
-fi
-
-# start typing + [Up-Arrow] - fuzzy find history forward
+# I don't like fuzzyfind so I've removed it
+# [Up-Arrow] - history up 
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
-  autoload -U up-line-or-beginning-search
-  zle -N up-line-or-beginning-search
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-history
 fi
-# start typing + [Down-Arrow] - fuzzy find history backward
+# [Down-Arrow] - history down
 if [[ "${terminfo[kcud1]}" != "" ]]; then
-  autoload -U down-line-or-beginning-search
-  zle -N down-line-or-beginning-search
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-history
 fi
 
 if [[ "${terminfo[khome]}" != "" ]]; then
@@ -66,10 +55,6 @@ bindkey ' ' magic-space                               # [Space] - do history exp
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 
-if [[ "${terminfo[kcbt]}" != "" ]]; then
-  bindkey "${terminfo[kcbt]}" reverse-menu-complete   # [Shift-Tab] - move through the completion menu backwards
-fi
-
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
 if [[ "${terminfo[kdch1]}" != "" ]]; then
   bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
@@ -80,7 +65,7 @@ else
 fi
 # Colors - arch wiki
 autoload -Uz colors && colors
-# git prompt status - oh-my-zsh
+# git prompt status - oh-my-zsh + modifcations
 # Hairy code that needs a refactor incoming~
 function git_prompt_status() {
   local INDEX STATUS
@@ -103,19 +88,6 @@ function git_prompt_status() {
   fi
   if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
     STATUS="%{$fg[magenta]%}✂$STATUS"
-  fi
-  #The following are unused, pending removal.
-  if $(command git rev-parse --verify refs/stash >/dev/null 2>&1); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_STASHED$STATUS" 
-  fi
-  if $(echo "$INDEX" | grep '^## .*ahead' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_AHEAD$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^## .*behind' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_BEHIND$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^## .*diverged' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DIVERGED$STATUS"
   fi
   echo $STATUS
 }
