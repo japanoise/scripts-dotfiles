@@ -1,4 +1,7 @@
 autoload -U promptinit && promptinit
+autoload -Uz compinit
+# Colors - arch wiki
+autoload -Uz colors && colors
 zmodload -i zsh/complist
 # Compinstall and zsh-newuser-install
 zstyle ':completion:*' completer _expand _complete _ignored _match _correct _approximate _prefix
@@ -9,7 +12,6 @@ zstyle ':completion:*' original true
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename '/home/chameleon/.zshrc'
 
-autoload -Uz compinit
 compinit
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -63,8 +65,6 @@ else
   bindkey "^[3;5~" delete-char
   bindkey "\e[3~" delete-char
 fi
-# Colors - arch wiki
-autoload -Uz colors && colors
 # git prompt status - oh-my-zsh + modifcations
 function git_prompt_status() {
   local INDEX STATUS
