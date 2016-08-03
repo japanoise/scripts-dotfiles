@@ -94,4 +94,8 @@ function mygit() {
 PROMPT=$'\n%{'"$P_F"$'%}┌─[%{'"$P_N"$'%}%n%{$fg_no_bold[yellow]%}@%{$fg_no_bold[cyan]%}%m%{'"$P_F"$'%}]─[%{$fg_bold[white]%}%~%{'"$P_F"$'%}]─[%{$fg_no_bold[yellow]%}'%D{"%Y-%m-%d %I:%M:%S %p"}$'%{'"$P_F"$'%}]%{$reset_color%}%b
 %{'"$P_F"'%}└─[%{$fg_bold[magenta]%}%?%{'"$P_F"$'%}] <$(mygit)%{'"$P_F"$'%}>%{$reset_color%}%b %# '
 PS2=$' $fg[blue]%}%B>%{$reset_color%}%b '
+# Nice aliases
+alias ls="ls --color"
+alias l="ls -l"
+alias lh="ls -lh"
 source ~/.zshrc-local #put machine-specific path, aliases etc. here
