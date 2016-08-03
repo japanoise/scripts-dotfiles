@@ -73,10 +73,10 @@ function git_prompt_status() {
   STATUS=""
   echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null && STATUS="%{$fg[blue]%}✈$STATUS"
   echo "$INDEX" | grep '^A  \|^M  ' &> /dev/null && STATUS="%{$fg[cyan]%}+$STATUS"
-  echo "$INDEX" | grep '^ M \|^AM \|^ T ' &> /dev/null && STATUS="%{$fg[yellow]%}✱$STATUS"
-  echo "$INDEX" | grep '^R  ' &> /dev/null && STATUS="%{$fg[blue]%}➦$STATUS"
+  echo "$INDEX" | grep '^ M \|^AM \|^ T ' &> /dev/null && STATUS="%{$fg[yellow]%}*$STATUS"
+  echo "$INDEX" | grep '^R  ' &> /dev/null && STATUS="%{$fg[blue]%}→$STATUS"
   echo "$INDEX" | grep '^ D \|^D  \|^AD ' &> /dev/null && STATUS="%{$fg[red]%}✗$STATUS"
-  echo "$INDEX" | grep '^UU ' &> /dev/null && STATUS="%{$fg[magenta]%}✂$STATUS"
+  echo "$INDEX" | grep '^UU ' &> /dev/null && STATUS="%{$fg[magenta]%}x$STATUS"
   echo $STATUS
 }
 
