@@ -1,3 +1,4 @@
+# Various fixes/magic
 autoload -U promptinit && promptinit
 autoload -Uz compinit
 # Colors - arch wiki
@@ -80,14 +81,17 @@ function git_prompt_status() {
 }
 
 # Prompt - user, host, full path, and time/date; modified from rkj-repos (oh-my-zsh)
-# on two lines for easier vgrepping
+# on two lines for easier vgrepping; uses proper zsh colours; easy to change frame and name colour; returns %/# to the prompt
+if [ "$(whoami)" = "root" ]; then P_F="$fg_bold[red]"; else; P_F="$fg_bold[blue]"; fi #frame color
+if [ "$(whoami)" = "root" ]; then P_N="$fg_no_bold[red]"; else; P_N="$fg_no_bold[green]"; fi #name color
 function mygit() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) 
     [ -z "$ref" ] && echo "" && return
     git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
-    echo "git: (${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{\e[0;34m%}%B)"
+    echo "%{$fg_no_bold[white]%}git: (${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{$fg_no_bold[white]%})"
 }
 # alternate prompt with git - removed hg as I don't use it.
-PROMPT=$'\n%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;30m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;34m%}%B]─%b%{\e[0;34m%}%B[%b%{\e[1;37m%}%~%{\e[0;34m%}%B]─%{\e[0;34m%}%B[%b%{\e[0;33m%}'%D{"%Y-%m-%d %I:%M:%S %p"}%b$'%{\e[0;34m%}%B]%b%{\e[0m%}
-%{\e[0;34m%}%B└─%B[%{\e[1;35m%}%?%{\e[0;34m%}%B] <''$(mygit)'$'%{\e[0;34m%}%B>%{\e[0m%}%b '
-PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
+PROMPT=$'\n%{'"$P_F"$'%}┌─[%{'"$P_N"$'%}%n%{$fg_no_bold[yellow]%}@%{$fg_no_bold[cyan]%}%m%{'"$P_F"$'%}]─[%{$fg_bold[white]%}%~%{'"$P_F"$'%}]─[%{$fg_no_bold[yellow]%}'%D{"%Y-%m-%d %I:%M:%S %p"}$'%{'"$P_F"$'%}]%{$reset_color%}%b
+%{'"$P_F"'%}└─[%{$fg_bold[magenta]%}%?%{'"$P_F"$'%}] <$(mygit)%{'"$P_F"$'%}>%{$reset_color%}%b %# '
+PS2=$' $fg[blue]%}%B>%{$reset_color%}%b '
+source ~/.zshrc-local #put machine-specific path, aliases etc. here
