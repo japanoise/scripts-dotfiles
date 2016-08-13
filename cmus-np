@@ -1,0 +1,20 @@
+#!/bin/sh
+STATUS=$(cmus-remote -Q 2>/dev/null)
+ARTIST=$( echo "$STATUS" | sed -ne'/artist/{p;q}' | cut -d " " -f 3- )
+TITLE=$( echo "$STATUS" | sed -ne'/title/{p;q}' | cut -d " " -f 3- )
+DURATION=$(echo "$STATUS" | sed -ne's/duration \([0-9]*\)*/\1/p' | head -n1)
+POSITION=$(echo "$STATUS" | sed -ne's/position \([0-9]*\)*/\1/p' | head -n1)
+
+if echo "$STATUS" | grep '^status paused$' >/dev/null 2>&1
+then
+	ICON="▇"
+else
+	ICON="▶"
+fi
+
+if [ -z "$ARTIST" ];
+then
+	echo "No music"
+else
+	echo -n "$ICON $ARTIST - $TITLE $(( ($POSITION * 100) / $DURATION))%"
+fi
