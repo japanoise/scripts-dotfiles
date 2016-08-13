@@ -9,11 +9,11 @@ update_interval 2
 use_spacer none
 
 TEXT
-C ${hwmon 1 temp 1}F ${cpu  cpu0}% | \
-M ${memperc}%/${swapperc}% | \
-B ${battery_short} ${battery_time} | \
-${if_existing /proc/net/route ppp0}P U ${upspeed ppp0} D ${downspeed ppp0} |${endif}\
-${if_existing /proc/net/route enp0s25}E U ${upspeed enp0s25} D ${downspeed enp0s25} |${endif}\
+${if_existing /proc/net/route ppp0}P U ${upspeed ppp0} D ${downspeed ppp0} | ${endif}\
+${if_existing /proc/net/route eth0}E U ${upspeed eth0} D ${downspeed eth0} | ${endif}\
 ${if_existing /proc/net/route wlp3s0}W U ${upspeed enp0s25} D ${downspeed enp0s25}\
 ${wireless_link_qual_perc wlp3s0}% | ${endif}\
+C ${cpubar cpu0 9,10} (${cpu cpu0}%) | \
+M ${membar 9,10} (${memperc}%) | \
+${execi 2 /home/chameleon/bin/cmus-np} | \
 ${time %a, %b %d %Y %H:%M:%S (%z)}
