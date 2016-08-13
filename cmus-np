@@ -16,5 +16,5 @@ if [ -z "$ARTIST" ];
 then
 	echo "No music"
 else
-	echo -n "$ICON $ARTIST - $TITLE $(( ($POSITION * 100) / $DURATION))%"
+	printf "%s" "$ICON $ARTIST - $TITLE $(( ($POSITION * 100) / $DURATION))%"
 fi
