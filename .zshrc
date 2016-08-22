@@ -98,4 +98,4 @@ PS2=$' $fg[blue]%}%B>%{$reset_color%}%b '
 alias ls="ls --color"
 alias l="ls -l"
 alias lh="ls -lh"
-source ~/.zshrc-local #put machine-specific path, aliases etc. here
+if [ -f ~/.zshrc-local ]; then source ~/.zshrc-local; fi #put machine-specific path, aliases etc. here
