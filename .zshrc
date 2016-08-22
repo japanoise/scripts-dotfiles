@@ -91,7 +91,7 @@ function mygit() {
     echo "%{$reset_color%}git: (${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{$reset_color%})"
 }
 # alternate prompt with git - removed hg as I don't use it.
-PROMPT=$'\n%{'"$P_F"$'%}┌─[%{'"$P_N"$'%}%n%{$fg_no_bold[yellow]%}@%{$fg_no_bold[cyan]%}%m%{'"$P_F"$'%}]─[%{$reset_color%}%~%{'"$P_F"$'%}]─[%{$fg_no_bold[yellow]%}'%D{"%Y-%m-%d %I:%M:%S %p"}$'%{'"$P_F"$'%}]%{$reset_color%}%b
+PROMPT=$'\n%{'"$P_F"$'%}┌─[%{'"$P_N"$'%}%n%{$fg_no_bold[yellow]%}@%{$fg_no_bold[cyan]%}%m%{'"$P_F"$'%}]─[%{$reset_color%}%~%{'"$P_F"$'%}]─[%{$fg_no_bold[yellow]%}'%D{"%Y-%m-%d %H:%M"}$'%{'"$P_F"$'%}]%{$reset_color%}%b
 %{'"$P_F"'%}└─[%{$fg_bold[magenta]%}%?%{'"$P_F"$'%}] <$(mygit)%{'"$P_F"$'%}>%{$reset_color%}%b %# '
 PS2=$' $fg[blue]%}%B>%{$reset_color%}%b '
 # Nice aliases
