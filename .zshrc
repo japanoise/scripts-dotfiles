@@ -80,20 +80,20 @@ function git_prompt_status() {
   echo $STATUS
 }
 
-# Prompt - user, host, full path, and time/date; modified from rkj-repos (oh-my-zsh)
-# on two lines for easier vgrepping; uses proper zsh colours; easy to change frame and name colour; returns %/# to the prompt
-if [ "$(whoami)" = "root" ]; then P_F="$fg_bold[red]"; else; P_F="$fg_bold[blue]"; fi #frame color
-if [ "$(whoami)" = "root" ]; then P_N="$fg_no_bold[red]"; else; P_N="$fg_no_bold[green]"; fi #name color
+# Prompt \nuser@host:dir\nHH:MM $? <git> % 
+# colorful, truncates nicely, visual sign of root access
+# because of the truncation, it can handle terminals as narrow as 42
 function mygit() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) 
     [ -z "$ref" ] && echo "" && return
     git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
-    echo "%{$reset_color%}git: (${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{$reset_color%})"
+    echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
 }
-# alternate prompt with git - removed hg as I don't use it.
-PROMPT=$'\n%{'"$P_F"$'%}┌─[%{'"$P_N"$'%}%n%{$fg_no_bold[yellow]%}@%{$fg_no_bold[cyan]%}%m%{'"$P_F"$'%}]─[%{$reset_color%}%~%{'"$P_F"$'%}]─[%{$fg_no_bold[yellow]%}'%D{"%Y-%m-%d %H:%M"}$'%{'"$P_F"$'%}]%{$reset_color%}%b
-%{'"$P_F"'%}└─[%{$fg_bold[magenta]%}%?%{'"$P_F"$'%}] <$(mygit)%{'"$P_F"$'%}>%{$reset_color%}%b %# '
-PS2="%{$fg_bold[yellow]%}%_ %{'"$P_F"$'%}>%{$reset_color%} "
+PS1=$'\n%10>…>%{%(!.%F{red}.%F{green})%}%n%<<%{%F{yellow}%}@%{%F{cyan}%}%10>…>%M%<<%{%F{yellow}%}:%{%f%}%20<…<%~%>>
+%{%F{red}%}%D{%K}%{%F{yellow}%}:%{%F{red}%}%D{%m} %{$fg_bold[magenta]%}%?%{$reset_color%} %{$fg_bold[blue]%}<$(mygit)%{$fg_bold[blue]%}>%{$reset_color%} %# '
+PS2="%{%F{yellow}%}%_ %{%B%F{blue}%b%}>%{%f%} "
+# cheeky right prompt
+RPROMPT="%(?.:^%).:^()"
 # Nice aliases
 alias ls="ls --color"
 alias l="ls -l"
