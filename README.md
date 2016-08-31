@@ -38,6 +38,10 @@ Theming (now custom), settings for urxvt.
 ### .zshrc
 Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt with git. 
 
+On this branch, it's a scratch made, colourful theme called carnival.
+carnival behaves nicely on small terminals because it truncates to 42
+characters.
+
 Loads from .zshrc-local for machine specific commands.
 
 ## The scripts
