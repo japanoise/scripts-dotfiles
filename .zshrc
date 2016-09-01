@@ -90,7 +90,7 @@ function mygit() {
     echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
 }
 PS1=$'\n%10>…>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{$fg[cyan]%}%10>…>%M%<<%{$fg[yellow]%}:%{%f%}%20<…<%~%>>
-%{$fg[red]%}%D{%K}%{$fg[yellow]%}:%{$fg[red]%}%D{%m} %{$fg_bold[magenta]%}%?%{$reset_color%} %{$fg_bold[blue]%}<$(mygit)%{$fg_bold[blue]%}>%{$reset_color%} %# '
+%{$fg[red]%}%D{%K}%{$fg[yellow]%}:%{$fg[red]%}%D{%M} %{$fg_bold[magenta]%}%?%{$reset_color%} %{$fg_bold[blue]%}<$(mygit)%{$fg_bold[blue]%}>%{$reset_color%} %# '
 PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%} "
 # cheeky right prompt
 RPROMPT="%(?.:^%).:^()"
