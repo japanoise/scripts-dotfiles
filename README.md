@@ -38,8 +38,8 @@ Theming (now custom), settings for urxvt.
 ### .zshrc
 Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt with git. 
 
-Master branch's prompt is rkj-repos from oh-my-zsh with some customization.
-If you'd like a more minimal prompt that will also fit on tiny terminals, checkout the carnival branch with `git checkout carnival`.
+The theme is called carnival. It behaves nicely on small terminals because it truncates 
+to 42 characters. TODO: Make this a proper zsh theme that you can select using basic zsh.
 
 Loads from .zshrc-local for machine specific commands.
 
