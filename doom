@@ -1,0 +1,18 @@
+#!/bin/bash
+DOOM_IWAD="/home/chameleon/doom/iwad"
+DOOM_CMD="chocolate-doom"
+ZDOOM_CMD="gzdoom"
+if [[ $1 == z* ]]
+then
+	DOOM_CMD="$ZDOOM_CMD"
+fi
+case "$1" in
+	z1 | 1)
+	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM.WAD"
+	;;
+	z2 | 2)
+	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM2.WAD"
+	;;
+esac
+shift
+exec $DOOM_CMD "$@"
