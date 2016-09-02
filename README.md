@@ -53,6 +53,9 @@ Clone of a script seen in a screenshot; displays colors and guesses their values
 ### cmus-np
 If cmus is running, show a play or stop icon, artist, song, percentage completed. Else "No music."
 
+### doom
+Launcher for doom/sourceports. `doom [z]n [args]`
+
 ### info.sh
 Z3bra's info.sh from their ricing guide, ported to Gentoo.
 
