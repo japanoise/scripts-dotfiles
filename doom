@@ -1,7 +1,13 @@
 #!/bin/bash
-DOOM_IWAD="/home/chameleon/doom/iwad"
+DOOM_DIR="/home/chameleon/doom"
+DOOM_IWAD="$DOOM_DIR/iwad"
 DOOM_CMD="chocolate-doom"
-ZDOOM_CMD="gzdoom"
+ZDOOM_CMD="zandronum"
+if [ $# -lt 1 ]
+then
+	printf "%s\n" "usage: doom [z](12) [args]" 1>&2
+	exit 1
+fi
 if [[ $1 == z* ]]
 then
 	DOOM_CMD="$ZDOOM_CMD"
@@ -13,6 +19,9 @@ case "$1" in
 	z2 | 2)
 	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM2.WAD"
 	;;
+	complex )
+	DOOM_CMD="$ZDOOM_CMD -file $DOOM_DIR/pwad/complex-doom.v26a2.pk3 -file $DOOM_DIR/pwad/lca-v1.5.5.pk3"
 esac
 shift
+echo $DOOM_CMD
 exec $DOOM_CMD "$@"
