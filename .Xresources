@@ -2,11 +2,13 @@ URxvt*geometry: 120x40
 URxvt.font: xft:Tewi:pixelsize=9:antialias=false
 URxvt.preeditType: Root
 
-URxvt*saveLines: 10000
+URxvt*saveLines: 100000
 URxvt*scrollBar: false
 
 URxvt.urgentOnBell: true
 
+URxvt*cursorBlink: on
+URxvt*cursorUnderline: on
 URxvt*cursorColor: white
 URxvt*cursorColor2: #aaaaaa
 
@@ -78,6 +80,7 @@ URxvt.keysym.S-M-C-Down:  \033[1;8B
 URxvt.keysym.S-M-C-Right: \033[1;8C
 URxvt.keysym.S-M-C-Left:  \033[1;8D
 
+URxvt*cutchars: '"'&()*,;<=>?@[]^{|}\:
 URxvt*depth: 32
 
 Xft.lcdfilter: ldcdefault
@@ -90,37 +93,40 @@ xterm*metaSendsEscape: true
 xterm*foreground: rgb:cc/cc/cc
 xterm*background: rgb:00/00/00
 
-! phrak1 from terminal.sexy
-! With a slight tweak so its not using
-! a grey foreground...
- *.foreground:    #f8f8f8
-URxvt*background: rgba:0aaa/0aaa/0aaa/eeee
- *.cursorColor:  #a8a8a8
-! black
- *.color0:       #000000
- *.color8:       #545054
-! red
- *.color1:       #a80000
- *.color9:       #f85450
-! green
- *.color2:       #00a800
- *.color10:      #50fc50
-! yellow
- *.color3:       #a85400
- *.color11:      #f8fc50
-! blue
- *.color4:       #0000a8
- *.color12:      #5054f8
-! magenta
- *.color5:       #a800a8
- *.color13:      #f854f8
-! cyan
- *.color6:       #00a8a8
- *.color14:      #50fcf8
-! white
- *.color7:       #a8a8a8
- *.color15:      #f8fcf8
+! special
+*.foreground:   #98d1ce
+*.background:   #0a0f14
+*.cursorColor:  #98d1ce
 
-! bringing this back as stopped
-! using compton for it
-URxvt*fading: 30
+! black
+*.color0:       #0a0f14
+*.color8:       #161a1f
+
+! red
+*.color1:       #c33027
+*.color9:       #d26939
+
+! green
+*.color2:       #26a98b
+*.color10:      #204f44
+
+! yellow
+*.color3:       #edb54b
+*.color11:      #a79169
+
+! blue
+*.color4:       #195465
+*.color12:      #4c6670
+
+! magenta
+*.color5:       #4e5165
+*.color13:      #888ba5
+
+! cyan
+*.color6:       #33859d
+*.color14:      #599caa
+
+! white
+*.color7:       #98d1ce
+*.color15:      #d3ebe9
+
