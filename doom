@@ -20,6 +20,9 @@ case "$1" in
 	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM2.WAD"
 	;;
 	complex )
+	DOOM_CMD="$ZDOOM_CMD -file $DOOM_DIR/pwad/complex-doom.v26a2.pk3"
+	;;
+	lca )
 	DOOM_CMD="$ZDOOM_CMD -file $DOOM_DIR/pwad/complex-doom.v26a2.pk3 -file $DOOM_DIR/pwad/lca-v1.5.5.pk3"
 esac
 shift
