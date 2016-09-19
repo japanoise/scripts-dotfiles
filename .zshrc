@@ -79,17 +79,32 @@ function git_prompt_status() {
   echo "$INDEX" | grep '^UU ' &> /dev/null && STATUS="%{$fg[magenta]%}x$STATUS"
   echo $STATUS
 }
-
+hashcode() {
+	local hash=0
+	local str="$1"X
+	set --
+	while [ -n "$str" ]; do
+		next_str=${str#?}
+		ch=${str%"$next_str"}
+		set -- "$@" "'$ch"
+		str=$next_str
+	done
+	for n in $(printf '%d ' "$@"); do
+		hash=$(( (hash * 173 + n) % 256 ))
+	done
+	printf %s "$hash"
+}
 # Prompt \nuser@host:dir\nHH:MM $? <git> % 
 # colorful, truncates nicely, visual sign of root access
 # because of the truncation, it can handle terminals as narrow as 42
+zshhost=$(hashcode "$HOSTNAME")
 function mygit() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) 
     [ -z "$ref" ] && echo "" && return
     git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
     echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
 }
-PS1=$'\n%10>…>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{$fg[cyan]%}%10>…>%M%<<%{$fg[yellow]%}:%{%f%}%20<…<%~%>>
+PS1=$'\n%10>…>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${zshhost}m%}%10>…>%M%<<%{$fg[yellow]%}:%{%f%}%20<…<%~%>>
 %{$fg[red]%}%D{%K}%{$fg[yellow]%}:%{$fg[red]%}%D{%M} %{$fg_bold[magenta]%}%?%{$reset_color%} %{$fg_bold[blue]%}<$(mygit)%{$fg_bold[blue]%}>%{$reset_color%} %# '
 PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%} "
 # cheeky right prompt
