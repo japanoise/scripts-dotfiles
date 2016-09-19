@@ -23,19 +23,19 @@ unsetopt beep extendedglob nomatch notify
 # includes home and end :^)
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   function zle-line-init() {
-    echoti smkx
+	echoti smkx
   }
   function zle-line-finish() {
-    echoti rmkx
+	echoti rmkx
   }
   zle -N zle-line-init
   zle -N zle-line-finish
 fi
 
-bindkey -e                                            # Use emacs key bindings
+bindkey -e											# Use emacs key bindings
 
-bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark
-bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
+bindkey '\ew' kill-region							 # [Esc-w] - Kill from the cursor to the mark
+bindkey '^r' history-incremental-search-backward	  # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
 # I don't like fuzzyfind so I've removed it
 # [Up-Arrow] - history up 
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
@@ -47,20 +47,20 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
 fi
 
 if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
+  bindkey "${terminfo[khome]}" beginning-of-line	  # [Home] - Go to beginning of line
 fi
 if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
+  bindkey "${terminfo[kend]}"  end-of-line			# [End] - Go to end of line
 fi
 
-bindkey ' ' magic-space                               # [Space] - do history expansion
+bindkey ' ' magic-space							   # [Space] - do history expansion
 
-bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
+bindkey '^[[1;5C' forward-word						# [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word					   # [Ctrl-LeftArrow] - move backward one word
 
-bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
+bindkey '^?' backward-delete-char					 # [Backspace] - delete backward
 if [[ "${terminfo[kdch1]}" != "" ]]; then
-  bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
+  bindkey "${terminfo[kdch1]}" delete-char			# [Delete] - delete forward
 else
   bindkey "^[[3~" delete-char
   bindkey "^[3;5~" delete-char
@@ -84,16 +84,31 @@ function git_prompt_status() {
 # colorful, truncates nicely, visual sign of root access
 # because of the truncation, it can handle terminals as narrow as 42
 function mygit() {
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) 
-    [ -z "$ref" ] && echo "" && return
-    git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
-    echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
+	ref=$(command git symbolic-ref HEAD 2> /dev/null) 
+	[ -z "$ref" ] && echo "" && return
+	git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
+	echo " %{$fg_bold[blue]%}<%{$reset_color%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{$fg_bold[blue]%}>%{%f$reset_color%}"
 }
-PS1=$'\n%10>…>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{$fg[cyan]%}%10>…>%M%<<%{$fg[yellow]%}:%{%f%}%20<…<%~%>>
-%{$fg[red]%}%D{%K}%{$fg[yellow]%}:%{$fg[red]%}%D{%M} %{$fg_bold[magenta]%}%?%{$reset_color%} %{$fg_bold[blue]%}<$(mygit)%{$fg_bold[blue]%}>%{$reset_color%} %# '
-PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%} "
-# cheeky right prompt
-RPROMPT="%(?.:^%).:^()"
+hashcode() {
+	local hash=0
+	local str="$1"X
+	set --
+	while [ -n "$str" ]; do
+		next_str=${str#?}
+		ch=${str%"$next_str"}
+		set -- "$@" "'$ch"
+		str=$next_str
+	done
+	for n in $(printf '%d ' "$@"); do
+		hash=$(( (hash * 173 + n) % 256 ))
+	done
+	printf %s "$hash"
+}
+zshhost=$(hashcode "$HOSTNAME")
+PS1=$'\n%{\033[38;5;${zshhost}m%}%M%{$fg[yellow]%}:%{$reset_color%}%~ %# '
+PS2=$'%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%}'
+# right prompt with git
+RPROMPT=$'$(mygit)'
 # Nice aliases
 alias ls="ls --color"
 alias l="ls -l"
