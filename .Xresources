@@ -108,7 +108,7 @@ xterm*background: rgb:00/00/00
 
 ! green
 *.color2:       #26a98b
-*.color10:      #204f44
+*.color10:      #176855
 
 ! yellow
 *.color3:       #edb54b
