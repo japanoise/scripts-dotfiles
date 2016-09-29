@@ -3,6 +3,7 @@ DOOM_DIR="/home/chameleon/doom"
 DOOM_IWAD="$DOOM_DIR/iwad"
 DOOM_CMD="chocolate-doom"
 ZDOOM_CMD="zandronum"
+GZDOOM_CMD="gzdoom -glversion 2"
 if [ $# -lt 1 ]
 then
 	printf "%s\n" "usage: doom [z](12) [args]" 1>&2
@@ -12,11 +13,15 @@ if [[ $1 == z* ]]
 then
 	DOOM_CMD="$ZDOOM_CMD"
 fi
+if [[ $1 == g* ]]
+then
+	DOOM_CMD="$GZDOOM_CMD"
+fi
 case "$1" in
-	z1 | 1)
+	*1)
 	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM.WAD"
 	;;
-	z2 | 2)
+	*2)
 	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM2.WAD"
 	;;
 	complex )
