@@ -109,7 +109,15 @@ PS1=$'\n%10>…>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${z
 PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%} "
 # cheeky right prompt
 RPROMPT="%(?.:^%).:^()"
-# Nice aliases
+# Nice aliases and functions
+pastebin () {
+    if [ "$*" ]; then
+        local prompt="$(PS1="$PS1" bash -i <<<$'\nexit' 2>&1 | head -n1)"
+        ( echo "$(sed 's/\o033\[[0-9]*;[0-9]*m//g'  <<<"$prompt")$@"; exec $@; )
+    else
+        cat
+    fi | curl -F 'sprunge=<-' http://sprunge.us
+}
 alias ls="ls --color"
 alias l="ls -l"
 alias lh="ls -lh"
