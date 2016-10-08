@@ -29,6 +29,10 @@ case "$1" in
 	;;
 	lca )
 	DOOM_CMD="$ZDOOM_CMD -file $DOOM_DIR/pwad/complex/complex-doom.v26a2.pk3 -file $DOOM_DIR/pwad/complex/lca-v1.5.5.pk3"
+	;;
+	drla )
+	DOOM_CMD="$GZDOOM_CMD -file $DOOM_DIR/pwad/doomrl/doomrl_arsenal_1.05.wad -file $DOOM_DIR/pwad/doomrl/DoomRL_Arsenal_HUD_1.0.wad -file $DOOM_DIR/pwad/doomrl/doomrl_monsters_beta_6.2.wad"
+	;;
 esac
 shift
 echo $DOOM_CMD
