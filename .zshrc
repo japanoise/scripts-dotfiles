@@ -94,21 +94,32 @@ hashcode() {
 	done
 	printf %s "$hash"
 }
+hieroglyph() {
+	case "$1" in
+		osiris )
+			printf %s "𓊨𓁹𓁚";;
+		thoth )
+			printf %s "𓅝𓏏𓏭𓁚";;
+		anubis )
+			printf %s "𓇋𓈖𓅱𓁢";;
+		* )
+			printf %s "$1";;
+	esac
+}
 # Prompt \nuser@host:dir\nHH:MM $? <git> % 
 # colorful, truncates nicely, visual sign of root access
 # because of the truncation, it can handle terminals as narrow as 42
-zshhost=$(hashcode "$(hostname)")
+zshhost=$(hieroglyph "$(hostname)")
+zshhostc=$(hashcode "$(hostname)")
 function mygit() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) 
     [ -z "$ref" ] && echo "" && return
     git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
     echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
 }
-PS1=$'\n%10>…>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${zshhost}m%}%10>…>%M%<<%{$fg[yellow]%}:%{%f%}%20<…<%~%>>
-%{$fg[red]%}%D{%K}%{$fg[yellow]%}:%{$fg[red]%}%D{%M} %{$fg_bold[magenta]%}%?%{$reset_color%} %{$fg_bold[blue]%}<$(mygit)%{$fg_bold[blue]%}>%{$reset_color%} %# '
+PS1=$'\n%5>>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${zshhostc}m%}${zshhost}%{$fg[yellow]%}:%{%f%B%}%30<…<%~%>>%{%b%} %# '
 PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%} "
-# cheeky right prompt
-RPROMPT="%(?.:^%).:^()"
+RPROMPT=$'%(?..%{$fg_bold[magenta]%}%?%{$reset_color%} )$(mygit)'
 # Nice aliases and functions
 pastebin () {
     if [ "$*" ]; then
