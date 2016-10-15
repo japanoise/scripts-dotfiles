@@ -97,7 +97,7 @@ hashcode() {
 # Prompt \nuser@host:dir\nHH:MM $? <git> % 
 # colorful, truncates nicely, visual sign of root access
 # because of the truncation, it can handle terminals as narrow as 42
-zshhost=$(hashcode "$HOSTNAME")
+zshhost=$(hashcode "$(hostname)")
 function mygit() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) 
     [ -z "$ref" ] && echo "" && return
