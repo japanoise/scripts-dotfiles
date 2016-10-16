@@ -69,11 +69,12 @@
 # End of xbindkeys configuration #
 ##################################
 
-"urxvtc"
+"st"
   Mod4+Shift+Return
 
-"dmenu_run"
-  Mod4+p
+#Building this into dwm for ui consistency
+#"dmenu_run -nb \#0a0f14 -nf \#98d1ce -sb \#204f44 -sf \#d3ebe9"
+#  Mod4+p
 
 "i3lock"
   Control+Mod4+l
@@ -81,10 +82,10 @@
 "sudo -u ff palemoon"
   Mod4+Shift+p
 
-"quasselclient"
+"st -e weechat"
   Mod4+Shift+i
 
-"path=/home/chameleon/plan9port/bin:$PATH /home/chameleon/plan9port/bin/9term -W 640x400 rc"
+"path=$PLAN9/bin:$PATH $PLAN9/bin/9term -W 640x400 rc"
   Mod4+n
 
 "acme"
@@ -95,3 +96,18 @@
 
 "/home/chameleon/bin/screenshot.sh"
   Control+Mod4+s
+
+"/home/chameleon/bin/cmus-next"
+  XF86AudioNext
+
+"/home/chameleon/bin/cmus-prev"
+  XF86AudioPrev
+
+"/home/chameleon/bin/cmus-pause"
+  XF86AudioPlay
+
+"/home/chameleon/bin/volup"
+  XF86AudioRaiseVolume
+
+"/home/chameleon/bin/voldown"
+  XF86AudioLowerVolume
