@@ -1,0 +1,3 @@
+#!/bin/sh
+kona=`find /usr/share/cows/ -name "kona*" | sed -e 's!.*/!!' -e 's/.cow//'| shuf -n1`
+tewisay -f $kona $@
