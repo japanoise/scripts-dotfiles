@@ -59,7 +59,7 @@ bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 
 bindkey "${terminfo[kbs]}" backward-delete-char                     # [Backspace] - delete backward
-bindkey  '^[[P' delete-char            # [Delete] - delete forward
+bindkey  '^[[3~' delete-char            # [Delete] - delete forward
 
 # git prompt status - oh-my-zsh + modifcations
 function git_prompt_status() {
