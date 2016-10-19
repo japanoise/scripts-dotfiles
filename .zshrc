@@ -58,14 +58,9 @@ bindkey ' ' magic-space                               # [Space] - do history exp
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 
-bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
-if [[ "${terminfo[kdch1]}" != "" ]]; then
-  bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
-else
-  bindkey "^[[3~" delete-char
-  bindkey "^[3;5~" delete-char
-  bindkey "\e[3~" delete-char
-fi
+bindkey "${terminfo[kbs]}" backward-delete-char                     # [Backspace] - delete backward
+bindkey  '^[[P' delete-char            # [Delete] - delete forward
+
 # git prompt status - oh-my-zsh + modifcations
 function git_prompt_status() {
   local INDEX STATUS
@@ -118,7 +113,7 @@ function mygit() {
     echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
 }
 PS1=$'\n%5>>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${zshhostc}m%}${zshhost}%{$fg[yellow]%}:%{%f%B%}%30<…<%~%>>%{%b%} %# '
-PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%} "
+PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%}"
 RPROMPT=$'%(?..%{$fg_bold[magenta]%}%?%{$reset_color%} )$(mygit)'
 # Nice aliases and functions
 pastebin () {
@@ -128,6 +123,10 @@ pastebin () {
     else
         cat
     fi | curl -F 'sprunge=<-' http://sprunge.us
+}
+uguu(){
+	curl -i -F name="$1" -F file=@"$1" https://uguu.se/api.php?d=upload-tool
+	printf "\n"
 }
 alias ls="ls --color"
 alias l="ls -l"
