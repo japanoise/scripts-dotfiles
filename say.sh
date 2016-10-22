@@ -38,8 +38,10 @@ case "$FRAME" in
 	unicode);;
 	rounded) FRAMENW="╭";FRAMENE="╮";FRAMESE="╯";FRAMESW="╰";;
 	think) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=")";FRAMEW="(";THOUGHTS="o";;
-	classic) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">";FRAMEW="<";THOUGHTS="\\\\";;
-	classicish) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">";FRAMEW="<";THOUGHTS="\\\\";;
+	classic) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">"; FRAMES="-" FRAMEN="_"
+		FRAMEW="<";THOUGHTS="\\\\";;
+	classicish) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">"; FRAMES="-" FRAMEN="_"
+		FRAMEW="<";THOUGHTS="\\\\";;
 	say) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE="|";FRAMEW="|";THOUGHTS="\\\\";;
 	thick) FRAMENW="┏";FRAMESW="┗";FRAMENE="┓";FRAMESE="┛";FRAMEE="┃";FRAMEW="┃";FRAMEN="━";FRAMES="━";;
 	list) printf "%s\n" "classic classicish rounded say thick think unicode"; exit 0;;
