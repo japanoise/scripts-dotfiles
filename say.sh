@@ -13,6 +13,7 @@ FRAMES="─"
 FRAMEE="│"
 FRAMEW="│"
 THOUGHTS="╲"
+LINES=1
 
 COW="kona1"
 FRAME="unicode"
@@ -37,11 +38,16 @@ case "$FRAME" in
 	unicode);;
 	rounded) FRAMENW="╭";FRAMENE="╮";FRAMESE="╯";FRAMESW="╰";;
 	think) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=")";FRAMEW="(";THOUGHTS="o";;
+	classic) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">";FRAMEW="<";THOUGHTS="\\\\";;
 	classicish) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">";FRAMEW="<";THOUGHTS="\\\\";;
 	say) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE="|";FRAMEW="|";THOUGHTS="\\\\";;
 	thick) FRAMENW="┏";FRAMESW="┗";FRAMENE="┓";FRAMESE="┛";FRAMEE="┃";FRAMEW="┃";FRAMEN="━";FRAMES="━";;
-	list) printf "%s\n" "classicish rounded say thick think unicode"; exit 0;;
+	list) printf "%s\n" "classic classicish rounded say thick think unicode"; exit 0;;
 	preview) cat << 'EOF'
+ _________
+< classic >
+ ---------
+    \
  ____________
 < classicish >
  ------------
@@ -79,6 +85,10 @@ else
 	INPUT="$@"
 fi
 
+if [ "$FRAME" = "classic" ]
+then
+	LINES=$(printf "%s\n" "$INPUT" | wc -l)
+fi
 
 WIDTH=$(printf "%s\n" "$INPUT" | awk '{ print length($0); }' | sort -n -r | head -n1)
 bar() {
@@ -91,8 +101,14 @@ bar() {
 }
 
 bar "$FRAMENW" "$FRAMEN" "$FRAMENE"
-printf "%s\n" "$INPUT" | awk '{printf("%s",$0);n='$WIDTH'-length($0); for (i=0;i<n;i++) {printf("%s"," ");}print ""}'\
-	| sed -e "s/^/$FRAMEW /" -e "s/$/ $FRAMEE/"
+if [ "$LINES" -gt 1 ]
+then
+	printf "%s\n" "$INPUT" | awk '{printf("%s",$0);n='$WIDTH'-length($0); for (i=0;i<n;i++) {printf("%s"," ");}print ""}'\
+		| sed -e "s/^/| /" -e "s/$/ |/" -e'1s/^./\//' -e'1s/.$/\\/'  -e $LINES's/^./\\/' -e $LINES's/.$/\//'
+else
+	printf "%s\n" "$INPUT" | awk '{printf("%s",$0);n='$WIDTH'-length($0); for (i=0;i<n;i++) {printf("%s"," ");}print ""}'\
+		| sed -e "s/^/$FRAMEW /" -e "s/$/ $FRAMEE/"
+fi
 bar "$FRAMESW" "$FRAMES" "$FRAMESE"
 
 sed -e '/^$the_cow/d' -e '/^EOC/d' -e "s/\$thoughts/"$THOUGHTS"/g" < "$COWFILE"
