@@ -1,0 +1,4 @@
+#!/bin/sh
+waifu=$(printf "%s\n" "kona" "yuugi" "remi" | shuf -n1)
+cow=$(find /usr/share/cows/ -name "$waifu*" | sed -e 's!.*/!!' -e 's/.cow//'| shuf -n1)
+tewisay -f $cow $@
