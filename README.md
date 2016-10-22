@@ -1,8 +1,8 @@
 # scripts-dotfiles
 Blantantly copying ScoreUnder and **UNIX TRENDY HIPSTERS**
 
-All files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd appreciate a heads up if you use them, but it's
-not mandatory.
+All files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd 
+appreciate a heads up if you use them, but it's not mandatory.
 
 ## The dotfiles/configs
 ### compton.conf
@@ -21,7 +21,8 @@ Colours, keybindings.
 Theming, binding for fibonacci, etc.
 
 ### i3config
-ScoreUnder's with some personal preference modifications; less keybindings (they're done with xbindkeys instead for easy migration between wms)
+ScoreUnder's with some personal preference modifications; less keybindings 
+(they're done with xbindkeys instead for easy migration between wms)
 
 ### rkj-chameleon.zsh-theme
 My old oh-my-zsh theme; no longer maintained, use my .zshrc instead.
@@ -36,7 +37,8 @@ Bindings used with i3.
 Theming (now custom), settings for urxvt.
 
 ### .zshrc
-Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt with git. 
+Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt 
+with git. 
 
 The new theme is unnamed. It's loosely based on Score_Under's, having the user,
 machine, and current working directory, but I've applied truncation and added
@@ -49,10 +51,12 @@ Loads from .zshrc-local for machine specific commands.
 Background switcher using hsetroot.
 
 ### cdump.sh
-Clone of a script seen in a screenshot; displays colors and guesses their values from .Xresources.
+Clone of a script seen in a screenshot; displays colors and guesses their 
+values from .Xresources.
 
 ### cmus-np
-If cmus is running, show a play or stop icon, artist, song, percentage completed. Else "No music."
+If cmus is running, show a play or stop icon, artist, song, percentage 
+completed. Else "No music."
 
 ### doom
 Launcher for doom/sourceports. `doom [z]n [args]`
@@ -61,4 +65,5 @@ Launcher for doom/sourceports. `doom [z]n [args]`
 Z3bra's info.sh from their ricing guide, ported to Gentoo.
 
 ### screenshot.sh
-Crappy screenshot script; takes screenshot, runs optipng, puts it somewhere sensible with a sensible name.
+Crappy screenshot script; takes screenshot, runs optipng, puts it somewhere 
+sensible with a sensible name.
