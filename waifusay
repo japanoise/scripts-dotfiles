@@ -1,4 +1,13 @@
 #!/bin/sh
-waifu=$(printf "%s\n" "kona" "yuugi" "remi" | shuf -n1)
+case "$(basename $0)" in
+	kona* )
+		waifu="kona";;
+	yuugi* )
+		waifu="yuugi";;
+	remi* )
+		waifu="remi";;
+	*)
+		waifu=$(printf "%s\n" "kona" "yuugi" "remi" | shuf -n1);;
+esac
 cow=$(find /usr/share/cows/ -name "$waifu*" | sed -e 's!.*/!!' -e 's/.cow//'| shuf -n1)
 tewisay -f $cow $@
