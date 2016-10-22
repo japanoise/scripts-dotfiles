@@ -97,6 +97,8 @@ hieroglyph() {
 			printf %s "𓅝𓏏𓏭𓁚";;
 		anubis )
 			printf %s "𓇋𓈖𓅱𓁢";;
+		*1266 )
+                        printf %s "職場";;
 		* )
 			printf %s "$1";;
 	esac
