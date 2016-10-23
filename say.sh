@@ -45,10 +45,10 @@ case "$FRAME" in
 	rounded) FRAMENW="╭";FRAMENE="╮";FRAMESE="╯";FRAMESW="╰";;
 	think) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=")";FRAMEW="(";THOUGHTS="o";;
 	classic) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">"; FRAMES="-" FRAMEN="_"
-		FRAMEW="<";THOUGHTS="\\\\";;
+		FRAMEW="<";THOUGHTS='\\';;
 	classicish) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE=">"; FRAMES="-" FRAMEN="_"
-		FRAMEW="<";THOUGHTS="\\\\";;
-	say) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE="|";FRAMEW="|";THOUGHTS="\\\\";;
+		FRAMEW="<";THOUGHTS='\\';;
+	say) FRAMENW=" ";FRAMESW=" ";FRAMENE=" ";FRAMESE=" ";FRAMEE="|";FRAMEW="|";THOUGHTS='\\';;
 	thick) FRAMENW="┏";FRAMESW="┗";FRAMENE="┓";FRAMESE="┛";FRAMEE="┃";FRAMEW="┃";FRAMEN="━";FRAMES="━";;
 	list) printf "%s\n" "classic classicish rounded say thick think unicode"; exit 0;;
 	preview) cat << 'EOF'
@@ -124,4 +124,4 @@ else
 fi
 bar "$FRAMESW" "$FRAMES" "$FRAMESE"
 
-sed -e '/^$the_cow/d' -e '/^EOC/d' -e "s/\$thoughts/"$THOUGHTS"/g" -e"s/\$\?tongue/"$TONGUE"/g" -e"s/\$\?eyes/$EYES/g" < "$COWFILE"
+sed -e '/^$the_cow/d' -e '/^EOC/d' -e "s/\$thoughts/$THOUGHTS/g" -e"s/\$\?tongue/$TONGUE/g" -e"s/\$\?eyes/$EYES/g" < "$COWFILE"
