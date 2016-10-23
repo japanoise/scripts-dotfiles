@@ -14,17 +14,19 @@ FRAMEE="│"
 FRAMEW="│"
 THOUGHTS="╲"
 LINES=1
+TWIDTH=0
 
 COW="kona1"
 FRAME="unicode"
 
-while getopts b:f:l o
+while getopts W:b:f:l o
 do
 	case "$o" in
 		b) FRAME="$OPTARG";;
 		f) COW=$(basename -s .cow "$OPTARG");;
 		l) basename -s.cow /usr/share/cows/*.cow | xargs echo
 			exit 0;;
+		W) TWIDTH="$OPTARG";;
 	esac
 done
 shift $((OPTIND-1))
@@ -85,6 +87,11 @@ then
 	INPUT=$(cat | sed -e "s/\t/    /g")
 else
 	INPUT="$@"
+fi
+
+if [ "$TWIDTH" > 0 ]
+then
+	INPUT=$(printf "%s\n" "$INPUT" | fold -s -w $TWIDTH)
 fi
 
 if [ "$FRAME" = "classic" ]
