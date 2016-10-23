@@ -12,6 +12,8 @@ FRAMEN="─"
 FRAMES="─"
 FRAMEE="│"
 FRAMEW="│"
+EYES="oo"
+TONGUE="  "
 THOUGHTS="╲"
 LINES=1
 TWIDTH=0
@@ -19,13 +21,15 @@ TWIDTH=0
 COW="kona1"
 FRAME="unicode"
 
-while getopts W:b:f:l o
+while getopts W:b:f:e:t:l o
 do
 	case "$o" in
 		b) FRAME="$OPTARG";;
 		f) COW=$(basename -s .cow "$OPTARG");;
 		l) basename -s.cow /usr/share/cows/*.cow | xargs echo
 			exit 0;;
+		e) EYES="$OPTARG";;
+		t) TONGUE="$OPTARG";;
 		W) TWIDTH="$OPTARG";;
 	esac
 done
@@ -89,7 +93,7 @@ else
 	INPUT="$@"
 fi
 
-if [ "$TWIDTH" > 0 ]
+if [ "$TWIDTH" -gt 0 ]
 then
 	INPUT=$(printf "%s\n" "$INPUT" | fold -s -w $TWIDTH)
 fi
@@ -120,4 +124,4 @@ else
 fi
 bar "$FRAMESW" "$FRAMES" "$FRAMESE"
 
-sed -e '/^$the_cow/d' -e '/^EOC/d' -e "s/\$thoughts/"$THOUGHTS"/g" < "$COWFILE"
+sed -e '/^$the_cow/d' -e '/^EOC/d' -e "s/\$thoughts/"$THOUGHTS"/g" -e"s/\$\?tongue/"$TONGUE"/g" -e"s/\$\?eyes/$EYES/g" < "$COWFILE"
