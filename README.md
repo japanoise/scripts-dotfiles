@@ -1,8 +1,10 @@
 # scripts-dotfiles
 Blantantly copying ScoreUnder and **UNIX TRENDY HIPSTERS**
 
-All files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd 
-appreciate a heads up if you use them, but it's not mandatory.
+Most files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd 
+appreciate a heads up if you use them, but it's not mandatory. .xinitrc is currently
+licensed under the GNU GPLv2 license. I plan to rewrite it or base it on the Gentoo
+version soon, however.
 
 ## The dotfiles/configs
 ### compton.conf
