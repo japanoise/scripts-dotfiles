@@ -24,6 +24,9 @@ case "$1" in
 	*2)
 	DOOM_CMD="$DOOM_CMD -iwad $DOOM_IWAD/DOOM2.WAD"
 	;;
+	ark )
+	DOOM_CMD="$ZDOOM_CMD -file $DOOM_DIR/pwad/arkdoom/arkdoom-v0.9.9.3b-base.pk3 -file $DOOM_DIR/pwad/arkdoom/arkdoom-v0.9.9-hell.pk3"
+	;;
 	complex )
 	DOOM_CMD="$ZDOOM_CMD -file $DOOM_DIR/pwad/complex/complex-doom.v26a2.pk3"
 	;;
