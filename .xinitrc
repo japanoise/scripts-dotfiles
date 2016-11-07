@@ -42,7 +42,7 @@ case $WM in
 		compton -b
 		;;
 	*) hsetroot -solid '#333333'
-		conky -c conky-sa
-		exec rio -term 'pager=/usr/bin/more path=$PLAN9/bin:$PATH $PLAN9/bin/9term rc'
+		conky -c conkyrc-sa
+		exec rio -term 'pager=/usr/bin/more PATH=$PLAN9/bin:$PATH path=$PATH $PLAN9/bin/9term rc'
 		;;
 esac
