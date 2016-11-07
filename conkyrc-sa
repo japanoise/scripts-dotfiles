@@ -1,0 +1,12 @@
+update_interval 5
+background yes
+double_buffer yes
+use_xft yes
+font tewi2a:pixelsize=9:antialias=false
+gap_y 10
+
+TEXT
+Date: ${time %a %e %b %s %G}${font}
+Time: ${time %I:%M:%p}${font}
+Memory: ${mem} (${memperc}%)
+CPU: ${freq_g}GHz (${cpu}%) 
