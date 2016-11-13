@@ -90,18 +90,23 @@ hashcode() {
 	printf %s "$hash"
 }
 hieroglyph() {
-	case "$1" in
-		osiris )
-			printf %s "𓊨𓁹𓁚";;
-		thoth )
-			printf %s "𓅝𓏏𓏭𓁚";;
-		anubis )
-			printf %s "𓇋𓈖𓅱𓁢";;
-		*1266 )
-                        printf %s "職場";;
-		* )
-			printf %s "$1";;
-	esac
+	if [ "$TERM" = "st-256color" ]
+	then
+		case "$1" in
+			osiris )
+				printf %s "𓊨𓁹𓁚";;
+			thoth )
+				printf %s "𓅝𓏏𓏭𓁚";;
+			anubis )
+				printf %s "𓇋𓈖𓅱𓁢";;
+			*UK1266 )
+				printf %s "職場";;
+			* )
+				printf %s "$1";;
+		esac
+	else
+		printf %s "$1"
+	fi
 }
 # Prompt \nuser@host:dir\nHH:MM $? <git> % 
 # colorful, truncates nicely, visual sign of root access

@@ -63,6 +63,10 @@ completed. Else "No music."
 ### doom
 Launcher for doom/sourceports. `doom [z]n [args]`
 
+### imgur
+[Copyright Phillip Tang.](https://github.com/tangphillip/Imgur-Uploader) I
+only slightly modified it to use https instead of http for output links.
+
 ### info.sh
 Z3bra's info.sh from their ricing guide, ported to Gentoo.
 
