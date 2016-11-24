@@ -53,4 +53,6 @@ hi Todo         cterm=bold          ctermbg=NONE    ctermfg=NONE
 hi MatchParen   cterm=bold          ctermbg=250     ctermfg=NONE
 hi ColorColumn                      ctermbg=255
 hi clear SpellBad
+hi clear SpellRare
+hi clear SpellCap
 hi SpellBad cterm=underline
