@@ -56,3 +56,5 @@ hi clear SpellBad
 hi clear SpellRare
 hi clear SpellCap
 hi SpellBad cterm=underline
+" Hipster-ass markdown.
+hi markdownLinkText cterm=underline ctermfg=none ctermbg=none
