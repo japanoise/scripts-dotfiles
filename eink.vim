@@ -16,7 +16,7 @@ hi IncSearch    cterm=reverse                       ctermfg=NONE
 hi Search       cterm=reverse                       ctermfg=NONE
 hi MoreMsg      cterm=bold                          ctermfg=NONE
 hi ModeMsg      cterm=bold                          ctermfg=NONE
-hi LineNr       cterm=NONE                          ctermfg=238
+hi LineNr       cterm=NONE                          ctermfg=243
 hi StatusLine   cterm=bold,reverse                  ctermfg=NONE
 hi StatusLineNC cterm=reverse                       ctermfg=NONE
 hi VertSplit    cterm=reverse                       ctermfg=NONE
@@ -42,13 +42,13 @@ hi PreProc      cterm=None                          ctermfg=NONE
 hi Directive    cterm=NONE          ctermbg=NONE    ctermfg=NONE
 hi Conditional  cterm=NONE          ctermbg=NONE    ctermfg=NONE
 hi Comment      cterm=bold          ctermbg=NONE    ctermfg=NONE
-hi Func         cterm=None          ctermbg=234     ctermfg=250
+hi Func         cterm=None          ctermbg=NONE    ctermfg=NONE
 hi Identifier   cterm=NONE          ctermbg=NONE    ctermfg=NONE
 hi Statement    cterm=NONE          ctermbg=NONE    ctermfg=NONE
 hi Ignore       cterm=bold                          ctermfg=NONE
 hi String       cterm=underline                     ctermfg=NONE
-hi ErrorMsg     cterm=reverse       ctermbg=15      ctermfg=9
-hi Error        cterm=reverse       ctermbg=15      ctermfg=9
+hi ErrorMsg     cterm=NONE       ctermbg=NONE      ctermfg=9
+hi Error        cterm=NONE       ctermbg=NONE      ctermfg=9
 hi Todo         cterm=bold          ctermbg=NONE    ctermfg=NONE
 hi MatchParen   cterm=bold          ctermbg=250     ctermfg=NONE
 hi ColorColumn                      ctermbg=255
