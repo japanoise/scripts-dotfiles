@@ -16,7 +16,7 @@ hi IncSearch    cterm=reverse                       ctermfg=NONE
 hi Search       cterm=reverse                       ctermfg=NONE
 hi MoreMsg      cterm=bold                          ctermfg=NONE
 hi ModeMsg      cterm=bold                          ctermfg=NONE
-hi LineNr       cterm=NONE                          ctermfg=243
+hi LineNr       cterm=NONE                          ctermfg=none
 hi StatusLine   cterm=bold,reverse                  ctermfg=NONE
 hi StatusLineNC cterm=reverse                       ctermfg=NONE
 hi VertSplit    cterm=reverse                       ctermfg=NONE
@@ -50,7 +50,7 @@ hi String       cterm=underline                     ctermfg=NONE
 hi ErrorMsg     cterm=NONE       ctermbg=NONE      ctermfg=9
 hi Error        cterm=NONE       ctermbg=NONE      ctermfg=9
 hi Todo         cterm=bold          ctermbg=NONE    ctermfg=NONE
-hi MatchParen   cterm=bold          ctermbg=250     ctermfg=NONE
+hi MatchParen   cterm=bold  ctermbg=none     ctermfg=NONE
 hi ColorColumn                      ctermbg=255
 hi clear SpellBad
 hi clear SpellRare
