@@ -19,6 +19,25 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory autocd PROMPT_SUBST
 unsetopt beep extendedglob nomatch notify
+# title: https://github.com/MrElendig/dotfiles-alice
+case $TERM in
+  termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
+    precmd () {
+      print -Pn "\e]0;[%n@%M][%~]%#\a"
+    }
+    preexec () { print -Pn "\e]0;[%n@%M][%~]%# ($1)\a" }
+    ;;
+  screen|screen-256color)
+    precmd () {
+      print -Pn "\e]83;title \"$1\"\a"
+      print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a"
+    }
+    preexec () {
+      print -Pn "\e]83;title \"$1\"\a"
+      print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a"
+    }
+    ;;
+esac
 # Keys - oh-my-zsh + modifications
 # includes home and end :^)
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
@@ -37,7 +56,7 @@ bindkey -e                                            # Use emacs key bindings
 bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark
 bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
 # I don't like fuzzyfind so I've removed it
-# [Up-Arrow] - history up 
+# [Up-Arrow] - history up
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
   bindkey "${terminfo[kcuu1]}" up-line-or-history
 fi
@@ -90,31 +109,24 @@ hashcode() {
 	printf %s "$hash"
 }
 hieroglyph() {
-	if [ "$TERM" = "st-256color" ]
-	then
-		case "$1" in
-			osiris )
-				printf %s "𓊨𓁹𓁚";;
-			thoth )
-				printf %s "𓅝𓏏𓏭𓁚";;
-			anubis )
-				printf %s "𓇋𓈖𓅱𓁢";;
-			*UK1266 )
-				printf %s "職場";;
-			* )
-				printf %s "$1";;
-		esac
-	else
-		printf %s "$1"
-	fi
+	case "$1" in
+		osiris )
+			printf %s "𓊨𓁹𓁚";;
+		thoth )
+			printf %s "𓅝𓏏𓏭𓁚";;
+		anubis )
+			printf %s "𓇋𓈖𓅱𓁢";;
+		* )
+			printf %s "$1";;
+	esac
 }
-# Prompt \nuser@host:dir\nHH:MM $? <git> % 
+# Prompt \nuser@host:dir\nHH:MM $? <git> %
 # colorful, truncates nicely, visual sign of root access
 # because of the truncation, it can handle terminals as narrow as 42
 zshhost=$(hieroglyph "$(hostname)")
 zshhostc=$(hashcode "$(hostname)")
 function mygit() {
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) 
+    ref=$(command git symbolic-ref HEAD 2> /dev/null)
     [ -z "$ref" ] && echo "" && return
     git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
     echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
@@ -122,8 +134,8 @@ function mygit() {
 PS1=$'\n%5>>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${zshhostc}m%}${zshhost}%{$fg[yellow]%}:%{%f%B%}%30<…<%~%>>%{%b%} %# '
 PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%}"
 RPROMPT=$'%(?..%{$fg_bold[magenta]%}%?%{$reset_color%} )$(mygit)'
-export _JAVA_AWT_WM_NONREPARENTING=1
 # Nice aliases and functions
+stty -ixon
 pastebin () {
     if [ "$*" ]; then
         local prompt="$(PS1="$PS1" bash -i <<<$'\nexit' 2>&1 | head -n1)"
@@ -139,4 +151,7 @@ uguu(){
 alias ls="ls --color"
 alias l="ls -l"
 alias lh="ls -lh"
+alias adb="sudo adb"
+export GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
+export GTK_THEME=Arc-Dark
 if [ -f ~/.zshrc-local ]; then source ~/.zshrc-local; fi #put machine-specific path, aliases etc. here
