@@ -1,10 +1,9 @@
 # scripts-dotfiles
 Blantantly copying ScoreUnder and **UNIX TRENDY HIPSTERS**
 
-Most files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd 
-appreciate a heads up if you use them, but it's not mandatory. .xinitrc is currently
-licensed under the GNU GPLv2 license. I plan to rewrite it or base it on the Gentoo
-version soon, however.
+Most files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd
+appreciate a heads up if you use them, but it's not mandatory. Copyrights for
+files not written by me are noted in the list.
 
 ## The dotfiles/configs
 ### compton.conf
@@ -23,7 +22,7 @@ Colours, keybindings.
 Theming, binding for fibonacci, etc.
 
 ### i3config
-ScoreUnder's with some personal preference modifications; less keybindings 
+ScoreUnder's with some personal preference modifications; less keybindings
 (they're done with xbindkeys instead for easy migration between wms)
 
 ### rkj-chameleon.zsh-theme
@@ -39,8 +38,8 @@ Bindings used with i3.
 Theming (now custom), settings for urxvt.
 
 ### .zshrc
-Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt 
-with git. 
+Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt
+with git.
 
 The new theme is unnamed. It's loosely based on Score_Under's, having the user,
 machine, and current working directory, but I've applied truncation and added
@@ -53,11 +52,11 @@ Loads from .zshrc-local for machine specific commands.
 Background switcher using hsetroot.
 
 ### cdump.sh
-Clone of a script seen in a screenshot; displays colors and guesses their 
+Clone of a script seen in a screenshot; displays colors and guesses their
 values from .Xresources.
 
 ### cmus-np
-If cmus is running, show a play or stop icon, artist, song, percentage 
+If cmus is running, show a play or stop icon, artist, song, percentage
 completed. Else "No music."
 
 ### doom
@@ -71,5 +70,5 @@ only slightly modified it to use https instead of http for output links.
 Z3bra's info.sh from their ricing guide, ported to Gentoo.
 
 ### screenshot.sh
-Crappy screenshot script; takes screenshot, runs optipng, puts it somewhere 
+Crappy screenshot script; takes screenshot, runs optipng, puts it somewhere
 sensible with a sensible name.
