@@ -19,25 +19,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory autocd PROMPT_SUBST
 unsetopt beep extendedglob nomatch notify
-# title: https://github.com/MrElendig/dotfiles-alice
-case $TERM in
-  termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
-    precmd () {
-      print -Pn "\e]0;[%n@%M][%~]%#\a"
-    }
-    preexec () { print -Pn "\e]0;[%n@%M][%~]%# ($1)\a" }
-    ;;
-  screen|screen-256color)
-    precmd () {
-      print -Pn "\e]83;title \"$1\"\a"
-      print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a"
-    }
-    preexec () {
-      print -Pn "\e]83;title \"$1\"\a"
-      print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a"
-    }
-    ;;
-esac
 # Keys - oh-my-zsh + modifications
 # includes home and end :^)
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
@@ -79,61 +60,10 @@ bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move 
 
 bindkey "${terminfo[kbs]}" backward-delete-char                     # [Backspace] - delete backward
 bindkey  '^[[3~' delete-char            # [Delete] - delete forward
-
-# git prompt status - oh-my-zsh + modifcations
-function git_prompt_status() {
-  local INDEX STATUS
-  INDEX=$(command git status --porcelain -b 2> /dev/null)
-  STATUS=""
-  echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null && STATUS="%{$fg[blue]%}✈$STATUS"
-  echo "$INDEX" | grep '^A  \|^M  ' &> /dev/null && STATUS="%{$fg[cyan]%}+$STATUS"
-  echo "$INDEX" | grep '^ M \|^AM \|^ T ' &> /dev/null && STATUS="%{$fg[yellow]%}*$STATUS"
-  echo "$INDEX" | grep '^R  ' &> /dev/null && STATUS="%{$fg[blue]%}→$STATUS"
-  echo "$INDEX" | grep '^ D \|^D  \|^AD ' &> /dev/null && STATUS="%{$fg[red]%}✗$STATUS"
-  echo "$INDEX" | grep '^UU ' &> /dev/null && STATUS="%{$fg[magenta]%}x$STATUS"
-  echo $STATUS
-}
-hashcode() {
-	local hash=0
-	local str="$1"X
-	set --
-	while [ -n "$str" ]; do
-		next_str=${str#?}
-		ch=${str%"$next_str"}
-		set -- "$@" "'$ch"
-		str=$next_str
-	done
-	for n in $(printf '%d ' "$@"); do
-		hash=$(( (hash * 173 + n) % 256 ))
-	done
-	printf %s "$hash"
-}
-hieroglyph() {
-	case "$1" in
-		osiris )
-			printf %s "𓊨𓁹𓁚";;
-		thoth )
-			printf %s "𓅝𓏏𓏭𓁚";;
-		anubis )
-			printf %s "𓇋𓈖𓅱𓁢";;
-		* )
-			printf %s "$1";;
-	esac
-}
-# Prompt \nuser@host:dir\nHH:MM $? <git> %
-# colorful, truncates nicely, visual sign of root access
-# because of the truncation, it can handle terminals as narrow as 42
-zshhost=$(hieroglyph "$(hostname)")
-zshhostc=$(hashcode "$(hostname)")
-function mygit() {
-    ref=$(command git symbolic-ref HEAD 2> /dev/null)
-    [ -z "$ref" ] && echo "" && return
-    git_prompt_short_sha=$(command git rev-parse --short HEAD 2> /dev/null)
-    echo "%{%f%}${ref#refs/heads/} ${git_prompt_short_sha}$( git_prompt_status )%{%f$reset_color%}"
-}
-PS1=$'\n%5>>%{%(!.$fg[red].$fg[green])%}%n%<<%{$fg[yellow]%}@%{\033[38;5;${zshhostc}m%}${zshhost}%{$fg[yellow]%}:%{%f%B%}%30<…<%~%>>%{%b%} %# '
 PS2="%{$fg[yellow]%}%_ %{%B$fg[blue]%b%}>%{$reset_color%}"
-RPROMPT=$'%(?..%{$fg_bold[magenta]%}%?%{$reset_color%} )$(mygit)'
+autoload -U promptinit; promptinit
+prompt pure
+RPROMPT=$'%(?..%{$fg_bold[red]%}%?%{$reset_color%})'
 # Nice aliases and functions
 stty -ixon
 pastebin () {
