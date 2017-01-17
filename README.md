@@ -41,9 +41,8 @@ Theming (now custom), settings for urxvt.
 Imitates oh-my-zsh with custom theme, but with less bloat. Nice fancy prompt
 with git.
 
-The new theme is unnamed. It's loosely based on Score_Under's, having the user,
-machine, and current working directory, but I've applied truncation and added
-hieroglyphs for home machine hostnames.
+I now use [the pure theme for zsh.](https://github.com/sindresorhus/pure) So
+make sure you have it installed before using this file.
 
 Loads from .zshrc-local for machine specific commands.
 
