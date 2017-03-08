@@ -1,4 +1,9 @@
 # scripts-dotfiles
+
+**This repo is unmaintained and full of legacy crap.**
+[Please go to my new dotfiles repo unless you're interested in
+history.](https://github.com/japanoise/neo-dotfiles)
+
 Blantantly copying ScoreUnder and **UNIX TRENDY HIPSTERS**
 
 Most files are copyright (C) 2016 japanoise, licensed under the MIT license. I'd
